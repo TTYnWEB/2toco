@@ -7,14 +7,8 @@ export default function Input({ url, setUrl }) {
   const history = useHistory();
 
   const onClick = async () => (
-    await ax({
-      method: 'post',
-      port: 9000,
-      url: '/',
-      data: { url },
-    }).then(({ data: { guid }}) => (
-      history.push(`/${guid}`)
-    ))
+    await ax({ method: 'post', port: 9000, url: '/', data: { url }})
+      .then(({ data: { guid }}) => history.push(`/${guid}`))
   );
 
   const onKeyDown = ({ key }) => {
