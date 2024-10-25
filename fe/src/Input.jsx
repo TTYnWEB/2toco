@@ -29,11 +29,7 @@ export default function Input({ url, setUrl }) {
         onKeyDown={onKeyDown}
         fullWidth
       />
-      <Button
-        variant="contained"
-        onClick={onClick}
-        required
-      >
+      <Button variant="contained" onClick={onClick} required>
         shorten
       </Button>
     </>
