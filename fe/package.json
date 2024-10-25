@@ -1,0 +1,24 @@
+{
+  "name": "2tutu",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:9000",
+  "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.5",
+    "@mui/material": "^6.1.4",
+    "axios": "^1.7.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^5.3.4",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
