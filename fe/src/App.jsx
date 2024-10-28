@@ -4,14 +4,12 @@ import {
   Stack,
 } from '@mui/material';
 // IMPs - local
-import Routes from './Routes';
+import Routes from './routes/';
 
 export default function App() {
   return (
     <Container>
-      <Stack spacing={2} sx={{ alignItems: 'center' }}>
-        <Routes />
-      </Stack>
+      <Routes />
     </Container>
   );
 }
