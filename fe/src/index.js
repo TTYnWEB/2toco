@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import App from './App';
 
 // DATA
+// const dark = (localStorage['mui-mode'] === 'dark');
 const root = createRoot(document.getElementById('root'));
 const theme = createTheme({ colorSchemes: { dark: true }});
 
