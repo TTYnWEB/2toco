@@ -12,9 +12,7 @@ export default function Input({ url, setUrl }) {
   const onClick = useCallback(async () => {
     await ax({ method: 'post', port: 9000, url: '/', data: { url }})
       .then(({ data: { guid }}) => history.push(`/${guid}`))
-      .catch(err => {
-        setErr(true);
-      });
+      .catch(err => setErr(true));
   });
 
   const onKeyDown = useCallback(({ key }) => {
