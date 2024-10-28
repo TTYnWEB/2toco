@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// IMPs - StdLib
+import { spawnSync } from 'child_process';
 // IMPs - ExtLib
 import express from 'express';
 import helmet from 'helmet';
@@ -24,9 +26,15 @@ app.disable('x-powered-by');
 
 // MAIN
 app.post('/', ({ body: { url }}, res) => {
+  // invalid URL check
+  const { status: exitCode } = spawnSync('curl', ['-sSf', '-o', '/dev/null', url]);
+  const isInvalidURL = Boolean(exitCode);
+  if (isInvalidURL)
+    return res.status(400).send('invalid URL');
 
+  // valid URL - insert into DB - return guid
   insert(url);
-  
+
   const db = createDB();
   const q = `SELECT guid FROM urls WHERE url = ?;`;
 
