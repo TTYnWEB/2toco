@@ -1,20 +1,14 @@
 // IMPs - ExtLib
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Stack, IconButton } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
+import ax from 'axios';
 // IMPs - local
 import Settings from './Settings';
 import Input from './Input';
 
 export default function Home() {
   const [url, setUrl] = useState('');
-
-  //useEffect(async () => {
-  //  if (localStorage.getItem('autoClipW') === 'TRUE') {
-  //    const clipContent = await navigator.clipboard.readText();
-  //    setUrl(clipContent);
-  //  }
-  //});
 
   return (
     <Stack spacing={2} sx={{ alignItems: 'center' }}>
