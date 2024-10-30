@@ -1,5 +1,5 @@
 // IMPs - ExtLib
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { TextField, Button } from '@mui/material';
 import { useHistory } from "react-router-dom";
 import ax from 'axios';
@@ -23,6 +23,20 @@ export default function Input({ url, setUrl }) {
   const onChange = useCallback(({ target: { value }}) => (
     setUrl(value)
   ));
+
+  useEffect(() => {
+    const autoRead = async () => {
+      if (localStorage.autoClipR === 'TRUE') {
+        if (!document.hasFocus())
+          return;
+        const clipContent = await navigator.clipboard.readText();
+        await ax({ method: 'post', port: 9000, url: '/validate', data: { url: clipContent }})
+          .then(({ status })  => (status === 200) &&(setUrl(clipContent)))
+          .catch(() => {}); // no-op
+      }
+    };
+    autoRead();
+  }, []);
 
   return (
     <>
