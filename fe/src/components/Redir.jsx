@@ -29,10 +29,8 @@ export default function Redir() {
         if (localStorage.getItem('autoClipW') === 'TRUE')
           await navigator.clipboard.writeText(res_url);
       })
-      .catch(err => (
-        console.error('couldnt get', err)
-      ));
-  });
+      .catch(err => console.error('couldnt get', err));
+  }, []);
 
   return (
     <>
