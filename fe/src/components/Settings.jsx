@@ -1,5 +1,5 @@
 // IMPs - ExtLib
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { FormGroup, FormControlLabel, Switch } from '@mui/material';
 import { useColorScheme } from '@mui/material/styles';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -13,14 +13,15 @@ export default function Settings() {
   const lsIsTrue = useCallback(lsItem => (
     ((localStorage.getItem(lsItem)) === 'TRUE')
   ));
-  const [clipR, setClipR] = useState(lsIsTrue('clipR'));
-  const [clipW, setClipW] = useState(lsIsTrue('clipW'));
+  const [clipR, setClipR] = useState(lsIsTrue('autoClipR'));
+  const [clipW, setClipW] = useState(lsIsTrue('autoClipW'));
 
   const { mode, setMode } = useColorScheme();
+  const checked = useMemo(() => (mode === 'light'), [mode]);
   const lightSwitch = useCallback(() => setMode(
-    (mode === 'dark')
-      ? 'light'
-      : 'dark'
+    (mode === 'light')
+      ? 'dark'
+      : 'light'
   ));
 
   const onChange = useCallback((lsKey, isSet, set) => async ({ target: { checked }}) => {
@@ -41,11 +42,11 @@ export default function Settings() {
     localStorage.setItem('autoClipR', (clipR ? 'TRUE' : 'FALSE'));
   }, [clipR]);
 
-  //useEffect(async () => {
+  // useEffect(async () => {
   //  const { state: clipRpermissionStatus } = await navigator.permissions.query({ name: 'clipboard-read' });
   //  if (clipRpermissionStatus === 'granted')
   //    setClipR(true);
-  //});
+  // });
 
   return (
     <>
@@ -53,11 +54,12 @@ export default function Settings() {
       <FormGroup>
         <FormControlLabel
           control={control}
+          checked={checked}
           onChange={lightSwitch}
           label={
-            (mode === 'dark')
-              ? <DarkModeIcon />
-              : <LightModeIcon />
+            (mode === 'light')
+              ? <LightModeIcon />
+              : <DarkModeIcon />
           }
         />
         <FormControlLabel
@@ -65,6 +67,11 @@ export default function Settings() {
           checked={clipR}
           onChange={onChange('autoClipR', clipR, setClipR)}
           label="auto-clipboard-read"
+        />
+        <FormControlLabel
+          control={control}
+          checked={false}
+          label="auto-submit"
         />
         <FormControlLabel
           control={control}
