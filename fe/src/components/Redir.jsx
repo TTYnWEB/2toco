@@ -36,7 +36,6 @@ export default function Redir() {
     <>
       <h2>temporary link</h2>
       <a href={url}>{url}</a>
-      <p>guid: {guid}</p>
       <p>expires: {exp}</p>
       <a href="http://localhost:3000">2to.co</a>
     </>
